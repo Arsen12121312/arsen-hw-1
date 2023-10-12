@@ -1,43 +1,64 @@
-class Bank:
-    def __init__(self, name, balance):
+
+class SuperHero:
+    def __init__(self, name, hp, people):
         self.name = name
-        self.balance = balance
+        self.hp = hp
+        self.people = people
 
-    def moneyX(self):
-        amount = float(input("Enter the amount you want to add: "))
-        self.balance += amount
-        print(f"{amount} has been added to your account. Your new balance is {self.balance}")
+    def fly(self):
+        return False
 
-    def kill(self):
-        self.balance = 0
-        print("Your account has been reset. Your new balance is 0")
+    def attack(self):
+        return self.hp * 2
 
-    def __jackpot__(self):
-        self.balance *= 10
-        print(f"Your account has been multiplied by 10. Your new balance is {self.balance}")
-
-    def __combine__(self, other):
-        self.balance += other.balance
-        print(f"The balance of {other.name} has been combined with your account. Your new balance is {self.balance}")
+    def true_phrase(self):
+        return f"{self.name} is True!"
 
 
+class AirHero(SuperHero):
+    def __init__(self, name, hp, people, damage):
+        super().__init__(name, hp, people)
+        self.damage = damage
+        self.fly = True
+
+    def attack(self):
+        return self.hp ** 2
 
 
-class Calculator:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
+class GroundHero(SuperHero):
+    def __init__(self, name, hp, people, damage):
+        super().__init__(name, hp, people)
+        self.damage = damage
 
-    def __add__(self, other):
-        return self.a + other.b
+    def attack(self):
+        return self.hp ** 2
 
-    def __sub__(self, other):
-        return self.a - other.b
 
-    def __mul__(self, other):
-        return self.a * other.b
+class SpaceHero(SuperHero):
+    def __init__(self, name, hp, people, damage):
+        super().__init__(name, hp, people)
+        self.damage = damage
+        self.fly = True
 
-    def __truediv__(self, other):
-        if other.b == 0:
-            raise ValueError("Division by zero is not allowed")
-        return self.a / other.b
+    def attack(self):
+        return self.hp ** 2
+
+
+class Villain(SpaceHero):
+    def __init__(self, name, hp, people, damage):
+        super().__init__(name, hp, people, damage)
+        self.people = "monster"
+
+    def gen_x(self):
+        pass
+
+    def crit(self, target):
+        return target.hp - (self.damage ** 2)
+
+
+air_hero = AirHero("Airman", 100, "people", 20)
+ground_hero = GroundHero("Earthman", 150, "people", 30)
+space_hero = SpaceHero("Spaceman", 200, "people", 40)
+villain = Villain("Villain", 300, "monster", 50)
+
+print(air_hero.true)
